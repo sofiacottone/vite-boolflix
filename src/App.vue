@@ -13,7 +13,7 @@ export default {
         return {
             store,
             queryParams: {
-                query: 'ritorno'
+                query: 'a'
             }
         }
     },
@@ -21,13 +21,17 @@ export default {
         getMoviesFromApi() {
             let apiUrl = 'https://api.themoviedb.org/3/search/movie?api_key=f016167b7ad1b63b57570a64d8de7087';
 
+            if (store.searchedMovie !== '') {
+                this.queryParams.query = store.searchedMovie
+            }
+            console.log(store.searchedMovie);
+
             axios.get(apiUrl, {
                 params: this.queryParams
             })
                 .then((response) => {
                     store.movies = response.data.results
                 })
-            console.log(store.movies);
         }
     },
     mounted() {
@@ -37,7 +41,7 @@ export default {
 </script>
 
 <template>
-    <AppHeader></AppHeader>
+    <AppHeader @searchPerformed="getMoviesFromApi"></AppHeader>
 
     <main>
         <AppMainCards></AppMainCards>
