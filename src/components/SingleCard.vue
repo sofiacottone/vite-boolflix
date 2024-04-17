@@ -4,6 +4,14 @@
 export default {
     name: 'SingleCard',
     props: ['movieInfo'],
+    methods: {
+        getFlag() {
+            let flag = `/src/assets/img/flags/${this.movieInfo.original_language}.png`;
+            return flag;
+        }
+    },
+    mounted() {
+    }
 }
 </script>
 
@@ -18,7 +26,10 @@ export default {
             <div class="ms-flip-card-back">
                 <div>{{ movieInfo.title }}</div>
                 <div>{{ movieInfo.original_title }}</div>
-                <div>{{ movieInfo.original_language }}</div>
+                <div class="ms-flag-wrapper d-flex align-items-center gap-2">
+                    <div>{{ movieInfo.original_language }}</div>
+                    <img :src="getFlag()" onerror='this.style.display = "none"'>
+                </div>
                 <div>{{ Math.floor(movieInfo.vote_average / 2) }}</div>
             </div>
         </div>
@@ -35,6 +46,14 @@ export default {
         max-height: 100%;
         object-fit: contain;
         object-position: top;
+    }
+
+    .ms-flag-wrapper {
+
+        img {
+            width: 30px;
+
+        }
     }
 }
 </style>
