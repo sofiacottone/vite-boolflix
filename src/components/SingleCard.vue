@@ -19,7 +19,7 @@ export default {
                 <div>{{ movieInfo.title }}</div>
                 <div>{{ movieInfo.original_title }}</div>
                 <div>{{ movieInfo.original_language }}</div>
-                <div>{{ movieInfo.vote_average }}</div>
+                <div>{{ Math.floor(movieInfo.vote_average / 2) }}</div>
             </div>
         </div>
     </div>
