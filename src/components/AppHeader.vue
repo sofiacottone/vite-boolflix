@@ -21,7 +21,7 @@ export default {
                 <div class="d-flex" role="search">
                     <input v-model="store.searchedMovie" class="form-control btn-outline-danger me-2" type="search"
                         placeholder="Search" aria-label="Search">
-                    <button @click="$emit('searchPerformed', 'searchSeriesPerformed')" class="btn btn-outline-danger"
+                    <button @click="$emit('searchPerformed')" class="btn btn-outline-danger"
                         type="submit">Search</button>
                 </div>
 
