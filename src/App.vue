@@ -13,18 +13,20 @@ export default {
         return {
             store,
             queryParams: {
-                query: 'a'
+                query: 'a',
+                media_type: ''
             }
         }
     },
     methods: {
         getMoviesFromApi() {
+            // movies 
             let apiUrl = 'https://api.themoviedb.org/3/search/movie?api_key=f016167b7ad1b63b57570a64d8de7087';
 
             if (store.searchedMovie !== '') {
-                this.queryParams.query = store.searchedMovie
+                this.queryParams.query = store.searchedMovie;
+                store.searchedMovie = ''
             }
-            console.log(store.searchedMovie);
 
             axios.get(apiUrl, {
                 params: this.queryParams
@@ -32,10 +34,20 @@ export default {
                 .then((response) => {
                     store.movies = response.data.results
                 })
+
+            // tv series 
+            let seriesApiUrl = 'https://api.themoviedb.org/3/search/tv?api_key=f016167b7ad1b63b57570a64d8de7087';
+            axios.get(seriesApiUrl, {
+                params: this.queryParams
+            })
+                .then((response) => {
+                    store.series = response.data.results
+                })
         }
     },
     mounted() {
         this.getMoviesFromApi();
+        // this.getSeriesFromApi();
     }
 }
 </script>
